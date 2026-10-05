@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Theme Studio • From story to meaning</title>
+<style>
+:root{--ink:#192e3a;--muted:#526673;--paper:#f4f1e9;--teal:#086a68;--line:#d6dedb;--gold:#ffca70;--success:#2d7c6f;--warning:#d89a37;--accent:#ff6b6b}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,sans-serif;transition:background-color .3s ease}
+@keyframes subtleFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}body.loaded{animation:subtleFlow 15s ease infinite;background-size:200% 200%}
+header{background:linear-gradient(135deg, var(--ink) 0%, #1a3a47 100%);color:white;padding:38px max(6vw,20px);box-shadow:0 10px 40px rgba(25,46,58,.15);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:0;right:-100px;width:300px;height:300px;background:rgba(8,106,104,.1);border-radius:50%;animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-20px)}}
+header p{max-width:740px;color:#d5e1e4}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.08;margin:14px 0;position:relative;z-index:1}
+h2{font-size:30px;line-height:1.2;color:var(--ink)}
+h3{line-height:1.3;color:var(--ink)}
+.eyebrow{letter-spacing:.16em;text-transform:uppercase;font-size:12px;font-weight:800;color:var(--teal)}
+header .eyebrow{color:var(--gold);text-shadow:0 2px 4px rgba(0,0,0,.1)}
+main{max-width:1100px;margin:auto;padding:24px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+button,.filebtn{font:inherit;cursor:pointer;border:1px solid var(--teal);border-radius:9px;padding:10px 16px;background:white;color:var(--teal);font-weight:650;transition:all .25s cubic-bezier(.4,.0,.2,1);position:relative;overflow:hidden}
+button::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--teal);opacity:.05;transition:left .3s ease}
+button:hover::before{left:0}
+button:hover{background:#e6f4f0;transform:translateY(-2px);box-shadow:0 8px 16px rgba(8,106,104,.15)}
+button:active{transform:translateY(0);box-shadow:0 4px 8px rgba(8,106,104,.1)}
+button[aria-current=step],.primary{background:var(--teal);color:white;box-shadow:0 8px 24px rgba(8,106,104,.3)}
+button[aria-current=step]:hover{background:#065754;box-shadow:0 12px 32px rgba(8,106,104,.4)}
+button:disabled{opacity:.55;cursor:wait}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+section{background:white;border:1px solid var(--line);padding:clamp(20px,4vw,40px);border-radius:18px;margin:20px 0;box-shadow:0 8px 25px rgba(25,46,58,.08);opacity:0;animation:slideIn .5s ease forwards;transition:box-shadow .3s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+section:hover{box-shadow:0 12px 40px rgba(25,46,58,.12)}
+section[hidden]{display:none}
+label{display:block;font-weight:650;margin:18px 0 6px;color:var(--ink);transition:color .2s ease}
+label:hover{color:var(--teal)}
+input,textarea,select{font:inherit;width:100%;border:2px solid var(--line);border-radius:8px;padding:12px;background:#fcfdfc;color:var(--ink);transition:all .2s ease}
+input:hover,textarea:hover,select:hover{border-color:var(--teal);background:#fff}
+input:focus,textarea:focus,select:focus{border-color:var(--teal);background:white;box-shadow:0 0 0 3px rgba(8,106,104,.1)}
+textarea{min-height:110px;resize:vertical}
+textarea.long{min-height:280px}
+small,.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.card{background:linear-gradient(135deg, #f4f7f5 0%, #f9fbf9 100%);border:1px solid var(--line);border-radius:12px;padding:20px;margin:14px 0;transition:all .3s ease;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg, rgba(8,106,104,.02) 0%, transparent 100%);opacity:0;transition:opacity .3s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(8,106,104,.1);border-color:var(--teal)}
+.card:hover::before{opacity:1}
+.card > *{position:relative;z-index:1}
+.notice{background:linear-gradient(135deg, #fff5df 0%, #fffbf0 100%);border-left:5px solid var(--warning);padding:14px 18px;margin:18px 0;border-radius:4px;animation:slideIn .4s ease}
+.notice.ferpa{background:linear-gradient(135deg, #e6f4f0 0%, #f0faf7 100%);border-left:5px solid var(--teal)}
+.feedback{white-space:pre-wrap;background:linear-gradient(135deg, #eaf5f1 0%, #f2faf7 100%);padding:16px;border-radius:10px;margin:14px 0;border-left:4px solid var(--teal)}
+.feedback:empty{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{transition:all .2s ease}
+.chips button[aria-pressed=false]{background:white;border-color:var(--line);color:var(--muted)}
+.chips button[aria-pressed=true]{background:var(--teal);color:white;box-shadow:0 4px 12px rgba(8,106,104,.25)}
+.rubric{margin:20px 0}
+.rubric table{width:100%;border-collapse:collapse;font-size:14px}
+.rubric th,.rubric td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}
+.rubric th{background:var(--paper);font-weight:700;color:var(--teal)}
+.rubric tr:hover{background:var(--paper)}
+.check{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.check input{width:auto;margin-top:4px}
+progress{width:100%;height:8px;border-radius:4px;border:none;background:var(--line)}
+progress::-webkit-progress-bar{background:var(--line)}
+progress::-webkit-progress-value{background:linear-gradient(90deg, var(--teal) 0%, var(--success) 100%)}
+progress::-moz-progress-bar{background:linear-gradient(90deg, var(--teal) 0%, var(--success) 100%)}
+#storyAssignment{background:linear-gradient(135deg, #e6f4f0 0%, #f0faf7 100%);border:2px solid var(--teal);border-radius:12px;padding:16px;margin:16px 0;display:none}
+#storyAssignment strong{color:var(--teal)}
+@media (max-width:768px){.grid{grid-template-columns:1fr}}
+</style>
+</head><body>
+
+<header>
+<div class="eyebrow">Literary Analysis Assignment</div>
+<h1>Theme Studio</h1>
+<p>Explore how universal truths emerge from stories. Work through seven stages to analyze theme, find evidence, and defend your interpretation.</p>
+</header>
+
+<main>
+
+<div id="storyAssignment" style="display:none">
+<strong>📖 Your Assigned Story:</strong> <span id="assignedStoryTitle" style="color:var(--teal);font-weight:700"></span>
+</div>
+
+<nav id="nav"></nav>
+
+<progress id="progress" max="7" value="0"></progress>
+<p style="text-align:center;font-size:13px;color:var(--muted)"><span id="progressText">0</span> / 7 stages complete</p>
+
+<!-- STORY REFERENCE (Sticky) -->
+<div id="storyReference" style="display:none;background:white;border:2px solid var(--teal);border-radius:12px;padding:16px;margin:16px 0;position:sticky;top:20px;max-height:40vh;overflow-y:auto;z-index:10;box-shadow:0 8px 24px rgba(8,106,104,.15)">
+<details style="cursor:pointer">
+<summary style="font-weight:700;color:var(--teal);margin-bottom:12px">📖 <span id="storyRefTitle">Story</span> (click to expand)</summary>
+<div id="storyRefText" style="background:#f9fbf9;padding:12px;border-radius:8px;font-size:14px;line-height:1.8"></div>
+</details>
+</div>
+
+<!-- STAGE 0: NOTICE - Sorting + Multiple Choice -->
+<section data-step="0" hidden>
+<div class="eyebrow">01 / Notice</div>
+<h2>🎯 Understand Theme</h2>
+<p>Before analyzing stories, learn how to identify themes. Complete the sorting activity and answer three questions about theme.</p>
+
+<!-- SVG DIAGRAM: Topic → Main Idea → Theme -->
+<div style="background:#f9fbf9;border:2px solid var(--teal);border-radius:12px;padding:20px;margin:20px 0;text-align:center">
+<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">
+<rect x="50" y="20" width="100" height="60" fill="#ffca70" stroke="#333" stroke-width="2" rx="4"/>
+<text x="100" y="45" font-size="12" font-weight="bold" text-anchor="middle" fill="#333">TOPIC</text>
+<text x="100" y="65" font-size="10" text-anchor="middle" fill="#333">(General subject)</text>
+
+<path d="M 150 50 L 200 50" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+<rect x="200" y="20" width="100" height="60" fill="#d89a37" stroke="#333" stroke-width="2" rx="4"/>
+<text x="250" y="45" font-size="12" font-weight="bold" text-anchor="middle" fill="white">MAIN IDEA</text>
+<text x="250" y="65" font-size="10" text-anchor="middle" fill="white">(Specific insight)</text>
+
+<path d="M 300 50 L 350 50" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+<rect x="350" y="20" width="100" height="60" fill="#086a68" stroke="#333" stroke-width="2" rx="4"/>
+<text x="400" y="45" font-size="12" font-weight="bold" text-anchor="middle" fill="white">THEME</text>
+<text x="400" y="65" font-size="10" text-anchor="middle" fill="white">(Universal truth)</text>
+
+<defs>
+<marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+<polygon points="0 0, 10 3, 0 6" fill="#333"/>
+</marker>
+</defs>
+</svg>
+</div>
+
+<!-- SORTING SECTION -->
+<div style="margin:20px 0">
+<h3 style="color:var(--teal);margin-bottom:12px">📌 Sort Statements into Categories</h3>
+<p style="color:var(--muted);font-size:14px">Click each statement below to choose which category it belongs in. There is no single right answer—use your thinking to place it where you believe it fits best.</p>
+</div>
+
+<div id="sort" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0"></div>
+
+<div id="unplaced" style="background:white;border:2px dashed #d6dedb;border-radius:10px;padding:14px;margin:20px 0;min-height:200px"></div>
+
+<button id="checkSort" class="primary" style="width:100%;margin:16px 0">✓ Check My Sorting</button>
+<div id="sortFeedback" class="feedback"></div>
+
+<!-- MULTIPLE CHOICE SECTION -->
+<div style="margin:30px 0;padding:20px;background:linear-gradient(135deg, #e6f4f0 0%, #f0faf7 100%);border-radius:12px;border:2px solid var(--teal)">
+<h3 style="color:var(--teal);margin-top:0">❓ Understanding Theme: Three Quick Questions</h3>
+<p style="color:var(--muted);font-size:14px">Answer the following three questions to assess your understanding of theme.</p>
+
+<div style="margin:16px 0;padding:14px;background:white;border-radius:8px;border:1px solid var(--line)">
+<p style="font-weight:600;margin:0 0 12px 0;color:var(--ink)"><b>Question 1:</b> What is the difference between a topic and a theme?</p>
+<label style="display:flex;gap:8px;margin:8px 0;cursor:pointer;font-weight:400"><input type="radio" name="mc1" value="a" id="mc1a"> A topic is what a story is about; a theme is the universal truth it reveals.</label>
+<label style="display:flex;gap:8px;margin:8px 0;cursor:pointer;font-weight:400"><input type="radio" name="mc1" value="b" id="mc1b"> They mean the same thing.</label>
+<label style="display:flex;gap:8px;margin:8px 0;cursor:pointer;font-weight:400"><input type="radio" name="mc1" value="c" id="mc1c"> A topic is universal; a theme is specific to one story.</label>
+</div>
+
+<div style="margin:16px 0;padding:14px;background:white;border-radius:8px;border:1px solid var(--line)">
+<p style="font-weight:600;margin:0 0 12px 0;color:var(--ink)"><b>Question 2:</b> Which of the following is the best example of a theme?</p>
+<label style="display:flex;gap:8px;margin:8px 0;cursor:pointer;font-weight:400"><input type="radio" name="mc2" value="a" id="mc2a"> Courage means acting despite fear.</label>
+<label style="display:flex;gap:8px;margin:8px 0;cursor:pointer;font-weight:400"><input type="radio" name="mc2" value="b" id="mc2b"> A girl goes to school.</label>
+<label style="display:flex;gap:8px;margin:8px 0;cursor:pointer;font-weight:400"><input type="radio" name="mc2" value="c" id="mc2c"> The story takes place in winter.</label>
+</div>
+
+<div style="margin:16px 0;padding:14px;background:white;border-radius:8px;border:1px solid var(--line)">
+<p style="font-weight:600;margin:0 0 12px 0;color:var(--ink)"><b>Question 3:</b> A strong theme should be:</p>
+<label style="display:flex;gap:8px;margin:8px 0;cursor:pointer;font-weight:400"><input type="radio" name="mc3" value="a" id="mc3a"> About the characters' names or specific plot details.</label>
+<label style="display:flex;gap:8px;margin:8px 0;cursor:pointer;font-weight:400"><input type="radio" name="mc3" value="b" id="mc3b"> A universal truth that applies beyond this one story.</label>
+<label style="display:flex;gap:8px;margin:8px 0;cursor:pointer;font-weight:400"><input type="radio" name="mc3" value="c" id="mc3c"> Always obvious and never open to interpretation.</label>
+</div>
+
+<button id="checkMC" class="primary" style="width:100%;margin:16px 0">✓ Check My Answers</button>
+<div id="mcFeedback" class="feedback"></div>
+<div id="mcScore" style="display:none;margin:12px 0;padding:12px;background:var(--success);color:white;border-radius:8px;font-weight:600;text-align:center"></div>
+</div>
+
+<button onclick="goto(1)" style="width:100%;padding:14px;margin-top:24px;background:var(--teal);color:white;border:none;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer">→ Continue to Stage 1 (Investigate)</button>
+</section>
+
+<!-- STAGE 1: INVESTIGATE -->
+<section data-step="1" hidden><div class="eyebrow">02 / Investigate</div><h2>🔍 Analyze Your Story</h2><p>Read your assigned story carefully. Answer three guided questions, then write your initial thematic claim.</p><label>Who is this story about? What details reveal their character?</label><textarea id="storyWho" data-save placeholder="Describe the main character(s) and what you learn about them..."></textarea><label>What conflict or challenge do they face?</label><textarea id="storyWhat" data-save placeholder="Describe the main struggle or problem in the story..."></textarea><label>What does this reveal about people in general?</label><textarea id="storyResult" data-save placeholder="What universal truth or insight does this situation reveal?..."></textarea><label>Based on your answers above, write your thematic claim:</label><textarea id="storyClaim" data-save placeholder="Write a sentence expressing the theme you notice in this story..."></textarea><label>Explain which details from the story support your claim:</label><textarea id="evidenceReason" data-save placeholder="Point to specific moments or details that reveal this theme..."></textarea><button onclick="goto(2)" style="width:100%;padding:14px;margin-top:24px;background:var(--teal);color:white;border:none;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer">→ Continue to Stage 2 (Repair)</button></section>
+
+<!-- STAGE 2: REPAIR -->
+<section data-step="2" hidden><div class="eyebrow">03 / Repair</div><h2>🔧 Strengthen Your Claim</h2><p>Test your claim by imagining a rival interpretation. Then refine your claim to be stronger.</p><label>What is a rival interpretation? (What might someone else claim the theme is?)</label><textarea id="rival" data-save placeholder="Write an alternative interpretation someone might make about this story..."></textarea><label>How would you respond to that rival claim? Refine your original claim to be clearer or stronger:</label><textarea id="repair" data-save placeholder="Explain why your interpretation is stronger, or revise your claim..."></textarea><label>How resilient is your claim? If the story ended differently, would your theme still hold true?</label><textarea id="twistAnswer" data-save placeholder="Explain whether your theme would still apply if a key detail changed..."></textarea><label>How confident are you in your interpretation? (1 = Not sure, 5 = Very confident)</label><select id="certainty" data-save><option value="">-- Choose --</option><option value="1">1 - Not sure</option><option value="2">2 - Somewhat uncertain</option><option value="3">3 - Neutral</option><option value="4">4 - Fairly confident</option><option value="5">5 - Very confident</option></select><div style="text-align:center;color:var(--muted);font-size:14px;margin:12px 0">Confidence: <span id="certaintyOut">--</span></div><button onclick="goto(3)" style="width:100%;padding:14px;margin-top:24px;background:var(--teal);color:white;border:none;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer">→ Continue to Stage 3 (Film)</button></section>
+
+<!-- STAGE 3: FILM -->
+<section data-step="3" hidden><div class="eyebrow">04 / Film</div><h2>🎬 Apply Theme to Film</h2><p>Choose a Disney film and identify how it explores a similar theme. This can be the exact same theme as your story, or a related one.</p><label>Which Disney film did you choose?</label><input id="film" data-save type="text" placeholder="Name of the Disney film..."><label>What theme does this film explore? (How does it relate to your story's theme?)</label><textarea id="theme" data-save placeholder="Describe the theme in this film and explain how it connects to your story..."></textarea><label>Describe Scene 1: Find a moment that reveals this theme</label><textarea id="sceneA" data-save placeholder="Describe a specific scene that shows this theme..."></textarea><label>Why does this scene reveal the theme?</label><textarea id="whyA" data-save placeholder="Explain how this scene demonstrates the theme..."></textarea><label>Describe Scene 2: Find another moment that reveals this theme</label><textarea id="sceneB" data-save placeholder="Describe a second scene that shows this theme..."></textarea><label>Why does this scene reveal the theme?</label><textarea id="whyB" data-save placeholder="Explain how this second scene demonstrates the theme..."></textarea><button onclick="goto(4)" style="width:100%;padding:14px;margin-top:24px;background:var(--teal);color:white;border:none;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer">→ Continue to Stage 4 (Defense)</button></section>
+
+<!-- STAGE 4: DEFENSE -->
+<section data-step="4" hidden><div class="eyebrow">05 / Defense</div><h2>⚔️ Defend Your Interpretation</h2><p>Anticipate a challenge to your argument. Then write a full defense essay.</p><label>How might someone challenge your interpretation? What is the strongest objection?</label><textarea id="challenge" data-save placeholder="What is the most convincing counterargument to your theme?..."></textarea><label>Write a full defense essay (at least 200 words). Your essay should:</label><ul style="color:var(--muted);font-size:14px"><li>State your theme clearly</li><li>Provide evidence from both the micro-story and the film</li><li>Explain how your evidence supports the theme</li><li>Address the strongest challenge to your interpretation</li><li>Conclude with why this theme matters</li></ul><textarea id="draft" data-save class="long" placeholder="Write your complete defense essay here..."></textarea><div style="text-align:center;color:var(--muted);font-size:13px;margin:12px 0">Word count: <span id="wordCount">0</span> words</div><button onclick="goto(5)" style="width:100%;padding:14px;margin-top:24px;background:var(--teal);color:white;border:none;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer">→ Continue to Stage 5 (Peer Review)</button></section>
+
+<!-- STAGE 5: PEER PROTOCOL -->
+<section data-step="5" hidden><div class="eyebrow">06 / Peer Protocol</div><h2>👥 Test it with a reader</h2><p>Pair with a classmate or use teacher feedback. Check each statement honestly; give one sentence to explain.</p><div id="checks"></div><button onclick="goto(6)" style="width:100%;padding:14px;margin-top:24px;background:var(--teal);color:white;border:none;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer">→ Continue to Stage 6 (Submit)</button></section>
+
+<!-- STAGE 6: SUBMIT -->
+<section data-step="6" hidden><div class="eyebrow">07 / Submit your work</div><h2>📤 Send to Your Teacher</h2><div style="background:linear-gradient(135deg, #e6f4f0 0%, #f0faf7 100%);border:2px solid var(--teal);border-radius:12px;padding:20px;margin:20px 0"><p style="font-size:14px;margin:0"><b>Your work will be saved to a Google Document and shared with you and your teacher.</b></p><p style="font-size:13px;color:var(--muted);margin:12px 0 0 0">You can access it anytime to view feedback. Your teacher will see your complete analysis, evidence, and defense. Grade will be posted in the shared document.</p></div><div style="background:white;border:2px solid #ddd;border-radius:8px;padding:16px;margin:20px 0"><label for="studentIdVerify" style="font-weight:700;display:block;margin-bottom:8px">Confirm Your Student ID Number</label><input id="studentIdVerify" type="text" placeholder="Enter your student ID (provided by teacher)"></div><div id="submitStatus" role="status" aria-live="polite" style="margin:16px 0;padding:12px;border-radius:6px;display:none;border-left:4px solid #ccc"></div><button id="submitNetlify" style="display:block;width:100%;padding:16px;font-size:16px;font-weight:bold;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;border:none;border-radius:8px;cursor:pointer;transition:all 0.3s ease;margin:20px 0">📤 Submit to Teacher</button><div class="notice ferpa"><strong>🔒 Privacy & Data Protection:</strong><ul style="margin:8px 0;padding-left:20px;font-size:13px"><li>Your submission uses only your student ID number (not your name)</li><li>Your Google Document is shared with you and your teacher only</li><li>Your work is protected under FERPA education privacy rules</li></ul></div></section>
+
+</main>
+
+<script>
+// NEW MICRO-STORIES (Better, more engaging)
+const stories=[
+  {
+    title:'The Promise',
+    lines:[
+      'Maya and Kai had been best friends since third grade. They shared everything—secrets, dreams, embarrassing moments.',
+      'One day, Kai confided in Maya: "My parents might divorce. I haven\'t told anyone."',
+      'Maya promised to keep it secret. She meant it.',
+      'But at lunch the next day, Maya\'s friend Emma asked why Kai seemed upset. Without thinking, Maya explained.',
+      'Within hours, the whole school seemed to know.',
+      'Kai didn\'t speak to Maya for weeks. Eventually, Kai\'s parents worked things out, but the trust never fully returned.',
+      'Years later, they ran into each other. Kai said, "I forgave you. But I never forgot that you couldn\'t keep my secret when it mattered most."'
+    ]
+  },
+  {
+    title:'The Stand',
+    lines:[
+      'Jordan noticed something wrong in the science class: the top students were always praised publicly, but struggling students were criticized in front of everyone.',
+      'The teacher claimed it was "motivation," but Jordan could see it crushed people\'s confidence instead.',
+      'One day, after a struggling student was called out harshly, Jordan raised their hand and said: "I don\'t think this is fair. Can we give feedback privately instead?"',
+      'The class went silent. Some students nodded. Others looked uncomfortable.',
+      'The teacher seemed annoyed. "This is how I\'ve always taught. If you can\'t handle it, maybe science isn\'t for you."',
+      'Jordan felt their heart race. They could back down. It would be easier.',
+      'Instead, Jordan said, "I\'ll keep coming. But I think we can be better than this."',
+      'It took months. But slowly, the teacher changed. And other students started speaking up about what they needed too.'
+    ]
+  },
+  {
+    title:'The Second Chance',
+    lines:[
+      'Marcus used to be a good student. Then things got hard at home. His parents argued constantly.',
+      'One day, angry and hurt, Marcus did something he regretted: he posted mean things about a classmate online.',
+      'It spread. The person he\'d hurt felt humiliated. Teachers got involved. Marcus faced consequences.',
+      'For a while, Marcus wanted to disappear. Everyone saw him differently now.',
+      'But one person didn\'t: Mrs. Chen, his English teacher.',
+      'She didn\'t make excuses for what he\'d done. But she also didn\'t give up on him.',
+      '"You messed up," she said. "But that\'s not all you are. Who do you want to become from here?"',
+      'Marcus apologized—really apologized—to the person he\'d hurt. He started volunteering. He found his way back.',
+      'Years later, Marcus realized: mistakes don\'t define you. What you do after them does.'
+    ]
+  },
+  {
+    title:'The Crossroads',
+    lines:[
+      'Priya\'s parents had given her strict instructions: never talk back. Always obey. Respect their authority.',
+      'But as she got older, Priya noticed: her parents made mistakes. Sometimes they were unfair. Sometimes they refused to listen.',
+      'One day, Priya discovered her parents were making a decision that would hurt her future, based on false information.',
+      'Priya knew the truth. She had evidence. But speaking up meant directly defying them.',
+      'Her friends told her to stay quiet. Her parents\' culture valued obedience above all else.',
+      'Priya felt torn. Love and respect for her parents conflicted with doing what she knew was right.',
+      'She chose to speak. She presented her evidence calmly and respectfully. It wasn\'t a fight. It was a conversation.',
+      'Her parents didn\'t immediately agree. But they listened. And eventually, they understood.',
+      'Priya learned: true respect isn\'t blind obedience. It\'s honesty, even when it\'s hard.'
+    ]
+  }
+];
+
+// Sort statements (same as before)
+const sortStatements=[
+  {text:'Courage means acting despite fear',category:'theme'},
+  {text:'Overcoming obstacles',category:'main'},
+  {text:'Running a race',category:'topic'},
+  {text:'Trust can be broken by careless words',category:'theme'},
+  {text:'Friendship',category:'topic'},
+  {text:'A friend shares a secret',category:'main'},
+  {text:'Change is possible through effort and time',category:'theme'},
+  {text:'Mistakes and consequences',category:'topic'},
+  {text:'A student faces punishment for wrong choices',category:'main'},
+  {text:'Speaking truth requires bravery',category:'theme'},
+  {text:'Family relationships',category:'topic'},
+  {text:'A teenager disagrees with parents\' decision',category:'main'}
+];
+
+// Peer checklist
+const checks=[
+  'The theme is arguable (not obvious or absolute).',
+  'The theme reaches beyond character names and specific plot points.',
+  'Both the story and film provide clear evidence for the theme.',
+  'The defense anticipates and addresses a challenge or counterargument.',
+  'The writing is clear enough that someone unfamiliar with the stories can follow the argument.'
+];
+
+// Multiple choice answers
+const mcAnswers={mc1:'a',mc2:'a',mc3:'b'};
+
+// STATE MANAGEMENT
+let state={step:0,variant:null,values:{},sortState:{topic:[],main:[],theme:[]},selected:[],sortScore:0,mcScore:0};
+function $(...args){return document.querySelector(...args)}
+function esc(s){return (s+'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function val(id){return $('#'+id)?.value||''}
+function save(){localStorage.setItem('theme-studio',JSON.stringify(state))}
+function load(){try{Object.assign(state,JSON.parse(localStorage.getItem('theme-studio'))||{})}catch(e){}}
+load();
+
+function hydrate(){
+  load();
+  if(!state.variant)state.variant=Math.floor(Math.random()*stories.length);
+  if(!state.sortState)state.sortState={topic:[],main:[],theme:[]};
+  
+  if(val('student').trim()){$('storyAssignment').style.display='block';$('assignedStoryTitle').textContent=stories[state.variant].title}
+  
+  let nav=$('nav');nav.innerHTML='';
+  ['Notice','Investigate','Repair','Film','Defense','Peer','Submit'].forEach((label,i)=>{
+    let btn=document.createElement('button');btn.textContent=label;btn.onclick=()=>goto(i);
+    if(i===state.step)btn.setAttribute('aria-current','step');nav.appendChild(btn)
+  });
+  
+  let sections=document.querySelectorAll('section');sections.forEach((s,i)=>{s.hidden=i!==state.step});
+  setupAutoSave();
+  
+  if(state.step>=1&&state.step<=5){
+    $('storyReference').style.display='block';$('storyRefTitle').textContent=stories[state.variant].title;
+    $('storyRefText').innerHTML='';
+    stories[state.variant].lines.forEach((line,i)=>{let p=document.createElement('p');p.textContent=(i+1)+'. '+line;p.style.cssText='margin:8px 0;color:#333';$('storyRefText').appendChild(p)})
+  }else{$('storyReference').style.display='none'}
+  
+  if(state.step===0){renderStage0()}
+  if(state.step===5){renderStage5()}
+  updateProgress()
+}
+
+function renderStage0(){
+  let sortDiv=$('sort');sortDiv.innerHTML='';
+  let existingUnplaced=document.getElementById('unplaced');
+  if(existingUnplaced&&existingUnplaced.parentElement)existingUnplaced.remove();
+  
+  let categories=['topic','main','theme'];
+  let categoryNames=['TOPIC','MAIN IDEA','THEME'];
+  let categoryColors=['#ffca70','#d89a37','#086a68'];
+  
+  categories.forEach((cat,idx)=>{
+    let col=document.createElement('div');
+    col.style.cssText='border:2px solid '+categoryColors[idx]+';border-radius:10px;padding:12px;background:#f9fbf9;min-height:300px';
+    col.id='sortCat_'+cat;
+    let header=document.createElement('h4');
+    header.textContent=categoryNames[idx];
+    header.style.cssText='color:'+categoryColors[idx]+';margin:0 0 12px 0;font-size:14px;text-transform:uppercase;letter-spacing:0.1em;font-weight:700';
+    col.appendChild(header);
+    sortDiv.appendChild(col)
+  });
+  
+  let shuffled=[...sortStatements].sort(()=>Math.random()-0.5);
+  let unplaced=document.createElement('div');
+  unplaced.style.cssText='background:white;border:2px dashed #d6dedb;border-radius:10px;padding:14px;margin-bottom:16px;min-height:200px';
+  unplaced.id='unplaced';
+  let unplacedHeader=document.createElement('p');
+  unplacedHeader.textContent='📌 Drag or click to sort these into the categories:';
+  unplacedHeader.style.cssText='margin:0 0 12px 0;font-weight:600;color:var(--muted)';
+  unplaced.appendChild(unplacedHeader);
+  
+  shuffled.forEach((stmt,i)=>{
+    let btn=document.createElement('button');btn.textContent='"'+stmt.text+'"';
+    btn.style.cssText='display:block;width:100%;text-align:left;margin:8px 0;padding:12px;background:white;border:2px solid #d6dedb;border-radius:6px;cursor:pointer;transition:all 0.2s ease;font-size:14px';
+    btn.dataset.statement=i;btn.dataset.category=stmt.category;
+    btn.onclick=()=>{
+      let menu=document.createElement('div');
+      menu.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border:2px solid #086a68;border-radius:12px;padding:20px;z-index:1000;box-shadow:0 10px 40px rgba(0,0,0,0.2);max-width:300px';
+      let prompt=document.createElement('p');
+      prompt.textContent='Which category does this statement belong in?';
+      prompt.style.cssText='font-weight:600;margin:0 0 12px 0;text-align:center';menu.appendChild(prompt);
+      
+      categories.forEach((cat,idx)=>{
+        let btn2=document.createElement('button');btn2.textContent=categoryNames[idx];
+        btn2.style.cssText='display:block;width:100%;margin:8px 0;padding:10px;background:'+categoryColors[idx]+';color:white;border:none;border-radius:6px;font-weight:600;cursor:pointer;font-size:14px';
+        btn2.onclick=()=>{
+          btn.remove();let target=document.getElementById('sortCat_'+cat);target.appendChild(btn);
+          btn.style.cssText='display:block;width:100%;text-align:left;margin:6px 0;padding:10px;background:'+categoryColors[idx]+';color:white;border:none;border-radius:6px;cursor:default;font-size:14px;font-weight:600';
+          btn.dataset.placedCategory=cat;
+          if(!state.sortState[cat])state.sortState[cat]=[];
+          state.sortState[cat].push(i);save();menu.remove();
+        };menu.appendChild(btn2)
+      });
+      document.body.appendChild(menu)
+    };
+    unplaced.appendChild(btn)
+  });
+  sortDiv.parentElement.insertBefore(unplaced,sortDiv)
+}
+
+function renderStage5(){
+  $('checks').innerHTML='';
+  checks.forEach((c,i)=>{
+    let container=document.createElement('div');
+    container.style.cssText='background:white;border:2px solid #d6dedb;border-radius:8px;padding:16px;margin:12px 0';
+    
+    let label=document.createElement('label');
+    label.style.cssText='display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;cursor:pointer';
+    let checkbox=document.createElement('input');
+    checkbox.type='checkbox';checkbox.id='peer'+i;checkbox.setAttribute('data-save','true');
+    checkbox.style.cssText='width:auto;margin-top:4px';
+    if(state.values['peer'+i]==='true'||state.values['peer'+i]===true){checkbox.checked=true}
+    checkbox.addEventListener('change',()=>{state.values['peer'+i]=checkbox.checked.toString();save()});
+    label.appendChild(checkbox);
+    let span=document.createElement('span');span.innerHTML='<b>'+esc(c)+'</b>';label.appendChild(span);
+    container.appendChild(label);
+    
+    let textarea=document.createElement('textarea');
+    textarea.id='peer'+i+'_explanation';textarea.setAttribute('data-save','true');
+    textarea.placeholder='Give one sentence explaining why you agree or disagree with this statement...';
+    textarea.style.cssText='width:100%;padding:10px;border:2px solid #e0e0e0;border-radius:6px;font-size:13px;line-height:1.6;min-height:60px';
+    if(state.values['peer'+i+'_explanation']){textarea.value=state.values['peer'+i+'_explanation']}
+    textarea.addEventListener('input',()=>{state.values['peer'+i+'_explanation']=textarea.value;save()});
+    container.appendChild(textarea);$('checks').appendChild(container)
+  })
+}
+
+function setupAutoSave(){
+  document.querySelectorAll('[data-save]').forEach(el=>{
+    el.id=el.id||'auto_'+Math.random().toString(36).slice(2,11);
+    if(state.values[el.id])el.value=state.values[el.id];
+    el.onload=null;
+    el.addEventListener('input',()=>{state.values[el.id]=el.value;updateProgress();save()});
+    el.addEventListener('change',()=>{state.values[el.id]=el.value;save()})
+  })
+}
+
+$('checkSort').onclick=()=>{
+  let fb=$('sortFeedback');if(!val('sortReason').trim()){fb.textContent='Explain your reasoning first.';return}
+  let correct=0,total=sortStatements.length;
+  sortStatements.forEach((stmt,i)=>{
+    let placed=false;
+    if(state.sortState.topic&&state.sortState.topic.includes(i)&&stmt.category==='topic')placed=true;
+    if(state.sortState.main&&state.sortState.main.includes(i)&&stmt.category==='main')placed=true;
+    if(state.sortState.theme&&state.sortState.theme.includes(i)&&stmt.category==='theme')placed=true;
+    if(placed)correct++
+  });
+  let placed=(state.sortState.topic?.length||0)+(state.sortState.main?.length||0)+(state.sortState.theme?.length||0);
+  if(placed<sortStatements.length){fb.textContent='⚠️ You\'ve placed '+placed+' of '+sortStatements.length+' statements. Sort all of them before checking.';return}
+  let accuracy=Math.round((correct/total)*100);
+  state.sortScore=accuracy;state.values.sortScore=accuracy;save();
+  fb.textContent='✅ You sorted '+correct+' of '+total+' correctly ('+accuracy+'%).';
+  fb.style.cssText='background:#d4edda;color:#155724;padding:16px;border-left:4px solid #28a745;border-radius:6px;margin:12px 0'
+};
+
+$('checkMC').onclick=()=>{
+  let correct=0;['mc1','mc2','mc3'].forEach(q=>{
+    let ans=document.querySelector('input[name="'+q+'"]:checked')?.value;
+    if(ans===mcAnswers[q])correct++
+  });
+  state.mcScore=correct;state.values.mcScore=correct;save();
+  $('mcScore').style.display='block';$('mcScore').textContent='You answered '+correct+' of 3 correctly.';
+  $('mcFeedback').textContent='✅ Theme assessment complete. Your score: '+correct+'/3.'
+};
+
+function goto(step){
+  document.querySelectorAll('[data-save]').forEach(el=>{if(el.id)state.values[el.id]=el.value});
+  state.step=step;save();hydrate()
+}
+
+function updateProgress(){
+  let completed=Object.keys(state.values).filter(k=>state.values[k]).length;
+  $('progress').value=Math.min(7,Math.floor(completed/3));
+  $('progressText').textContent=Math.min(7,Math.floor(completed/3))
+}
+
+$('submitNetlify').onclick=async function(){
+  const btn=$('submitNetlify'),status=$('submitStatus'),studentId=$('studentIdVerify').value.trim();
+  if(!studentId){status.innerHTML='⚠️ Enter your student ID to submit.';status.style.display='block';status.style.background='#fff3cd';status.style.color='#856404';return}
+  
+  const requirements=['sortReason','storyWho','storyWhat','storyResult','storyClaim','evidenceReason','rival','repair','twistAnswer','film','theme','sceneA','whyA','sceneB','whyB','challenge','draft'];
+  const missing=requirements.filter(k=>!val(k).trim());
+  let peerMissing=[];
+  for(let i=0;i<checks.length;i++){
+    let checked=document.getElementById('peer'+i)?.checked;
+    let explanation=val('peer'+i+'_explanation').trim();
+    if(checked&&!explanation){peerMissing.push('Peer item '+i+' needs explanation')}
+  }
+  
+  if(missing.length>0||peerMissing.length>0){
+    let missingList='';if(missing.length>0)missingList+='Missing: '+missing.join(', ')+'. ';
+    if(peerMissing.length>0)missingList+='Peer: '+peerMissing.join(', ')+'. ';
+    status.innerHTML='⚠️ '+missingList+'Complete all fields.';status.style.display='block';status.style.background='#fff3cd';status.style.color='#856404';return
+  }
+  
+  const peerReviews=[];for(let i=0;i<checks.length;i++){let exp=val('peer'+i+'_explanation').trim();if(exp)peerReviews.push(exp)}
+  btn.disabled=true;btn.textContent='⏳ Submitting...';status.innerHTML='Processing...';status.style.display='block';status.style.background='#e7f3ff';status.style.color='#004085';
+  
+  try{
+    const response=await fetch('/.netlify/functions/submit',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        studentId:studentId,
+        submission:{
+          sortReason:val('sortReason'),storyWho:val('storyWho'),storyWhat:val('storyWhat'),storyResult:val('storyResult'),storyClaim:val('storyClaim'),evidenceReason:val('evidenceReason'),rival:val('rival'),repair:val('repair'),twistAnswer:val('twistAnswer'),certainty:val('certainty')||'3',film:val('film'),theme:val('theme'),sceneA:val('sceneA'),whyA:val('whyA'),sceneB:val('sceneB'),whyB:val('whyB'),challenge:val('challenge'),draft:val('draft'),sortScore:state.sortScore||0,mcScore:state.mcScore||0,peerReviews:peerReviews
+        }
+      })
+    });
+    
+    const data=await response.json();
+    if(response.ok&&data.success){
+      status.innerHTML=`✅ <strong>Submission received!</strong><br>Your work has been saved to a Google Document.<br><a href="${data.message}" target="_blank" style="color:#0066cc;text-decoration:underline">View your submission</a>`;
+      status.style.background='#d4edda';status.style.color='#155724';btn.textContent='📤 Submitted'
+    }else{status.innerHTML='❌ Submission failed. Try again or contact your teacher.';status.style.background='#f8d7da';status.style.color='#721c24'}
+  }catch(error){status.innerHTML='❌ Network error. Check your connection and try again.';status.style.background='#f8d7da';status.style.color='#721c24';btn.disabled=false;btn.textContent='📤 Submit to Teacher'}
+};
+
+$('draft').addEventListener('input',()=>{let count=val('draft').trim().split(/\s+/).length;$('wordCount').textContent=count+' words'});
+$('certainty').addEventListener('input',()=>{$('certaintyOut').textContent=val('certainty')+' / 5'});
+
+hydrate()
+</script>
+
+</body></html>
