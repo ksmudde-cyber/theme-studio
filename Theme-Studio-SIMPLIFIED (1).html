@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Studio: 80s Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(45deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #FF1493 0%, #9D00FF 50%, #00D9FF 100%);
+      color: #000;
+      padding: 40px;
+      border-radius: 0;
+      margin-bottom: 30px;
+      box-shadow: 0 0 30px rgba(255, 20, 147, 0.8), 0 0 60px rgba(157, 0, 255, 0.6);
+      text-align: center;
+      border: 4px solid #FFFF00;
+      position: relative;
+    }
+
+    header::before {
+      content: '⚡';
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      font-size: 2.5em;
+    }
+
+    header::after {
+      content: '⚡';
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 2.5em;
+    }
+
+    header h1 {
+      font-family: 'Righteous', cursive;
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+      letter-spacing: 3px;
+    }
+
+    header p {
+      font-size: 1.3em;
+      font-weight: bold;
+      text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+    }
+
+    .stage-container {
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(255, 20, 147, 0.1) 100%);
+      padding: 35px;
+      border-radius: 0;
+      box-shadow: 0 0 30px rgba(255, 20, 147, 0.4), inset 0 0 20px rgba(157, 0, 255, 0.2);
+      margin-bottom: 30px;
+      border: 3px solid #00D9FF;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stage-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 20, 147, 0.03) 2px,
+        rgba(255, 20, 147, 0.03) 4px
+      );
+      pointer-events: none;
+    }
+
+    .stage-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stage-header {
+      border-left: 8px solid #FFFF00;
+      padding-left: 20px;
+      margin-bottom: 30px;
+      border-bottom: 3px dashed #FF1493;
+      padding-bottom: 15px;
+    }
+
+    .stage-header h2 {
+      font-family: 'Righteous', cursive;
+      color: #FFFF00;
+      font-size: 2.2em;
+      margin-bottom: 8px;
+      text-shadow: 2px 2px 0px #FF1493;
+      letter-spacing: 2px;
+    }
+
+    .stage-header p {
+      color: #00D9FF;
+      font-size: 1.05em;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 2;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      color: #FFFF00;
+      margin-bottom: 10px;
+      font-size: 1.05em;
+      text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 14px;
+      border: 3px solid #FF1493;
+      border-radius: 0;
+      font-size: 1em;
+      font-family: inherit;
+      background: rgba(26, 26, 46, 0.8);
+      color: #00D9FF;
+      transition: all 0.3s;
+      box-shadow: 0 0 15px rgba(255, 20, 147, 0.3);
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #00D9FF;
+      box-shadow: 0 0 25px rgba(0, 217, 255, 0.8), inset 0 0 10px rgba(0, 217, 255, 0.2);
+      background: rgba(26, 26, 46, 0.95);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #FF1493 0%, #9D00FF 100%);
+      color: #fff;
+      padding: 14px 28px;
+      border: 3px solid #FFFF00;
+      border-radius: 0;
+      font-size: 1.05em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 0 20px rgba(255, 20, 147, 0.6);
+      font-family: 'Righteous', cursive;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(255, 20, 147, 0.9), 0 0 20px rgba(0, 217, 255, 0.8);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    button.secondary {
+      background: linear-gradient(135deg, #00D9FF 0%, #9D00FF 100%);
+      border-color: #FFFF00;
+    }
+
+    .sorting-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin: 30px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .category-box {
+      border: 4px solid #FF1493;
+      border-radius: 0;
+      padding: 20px;
+      min-height: 320px;
+      background: rgba(0, 217, 255, 0.05);
+      box-shadow: 0 0 20px rgba(255, 20, 147, 0.5), inset 0 0 10px rgba(157, 0, 255, 0.2);
+    }
+
+    .category-box h4 {
+      color: #FFFF00;
+      margin-bottom: 15px;
+      font-size: 1.25em;
+      font-family: 'Righteous', cursive;
+      text-shadow: 1px 1px 0px #FF1493;
+    }
+
+    .sortable-item {
+      background: linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(157, 0, 255, 0.2) 100%);
+      border: 2px solid #00D9FF;
+      padding: 12px;
+      margin-bottom: 12px;
+      cursor: grab;
+      border-radius: 0;
+      transition: all 0.2s;
+      color: #00D9FF;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+    }
+
+    .sortable-item:hover {
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.8), 0 0 10px rgba(255, 20, 147, 0.6);
+      transform: scale(1.02);
+      border-color: #FFFF00;
+    }
+
+    .sortable-item.dragging {
+      opacity: 0.6;
+      transform: scale(0.95);
+    }
+
+    .unsorted-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .unsorted-items .sortable-item {
+      flex: 0 1 calc(50% - 6px);
+      margin-bottom: 0;
+    }
+
+    .fill-blank-exercise {
+      background: rgba(255, 20, 147, 0.1);
+      padding: 20px;
+      border: 3px dashed #9D00FF;
+      margin: 20px 0;
+      border-radius: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .fill-blank-exercise p {
+      color: #00D9FF;
+      font-size: 1.05em;
+      margin-bottom: 15px;
+      line-height: 1.8;
+    }
+
+    .fill-blank-exercise input {
+      width: 200px;
+      margin: 0 5px;
+      padding: 8px 12px;
+      border: 2px solid #FFFF00;
+    }
+
+    .mc-question {
+      background: rgba(157, 0, 255, 0.1);
+      padding: 22px;
+      border-left: 6px solid #FFFF00;
+      margin: 20px 0;
+      border-radius: 0;
+      box-shadow: 0 0 15px rgba(157, 0, 255, 0.4);
+      position: relative;
+      z-index: 2;
+    }
+
+    .mc-question h4 {
+      margin-bottom: 18px;
+      color: #FFFF00;
+      font-size: 1.1em;
+      font-family: 'Righteous', cursive;
+    }
+
+    .mc-option {
+      margin-bottom: 14px;
+    }
+
+    .mc-option label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
+      font-weight: normal;
+      cursor: pointer;
+      color: #00D9FF;
+      font-size: 1em;
+    }
+
+    .mc-option input[type="radio"] {
+      margin-right: 12px;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+
+    .feedback {
+      padding: 18px;
+      border-radius: 0;
+      margin: 20px 0;
+      font-weight: bold;
+      font-size: 1.05em;
+      position: relative;
+      z-index: 2;
+      border: 3px solid;
+    }
+
+    .feedback.correct {
+      background: rgba(0, 255, 100, 0.15);
+      border-color: #00FF64;
+      color: #00FF64;
+      box-shadow: 0 0 20px rgba(0, 255, 100, 0.5);
+    }
+
+    .feedback.incorrect {
+      background: rgba(255, 20, 147, 0.15);
+      border-color: #FF1493;
+      color: #FF69B4;
+      box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+    }
+
+    .feedback.info {
+      background: rgba(0, 217, 255, 0.15);
+      border-color: #00D9FF;
+      color: #00D9FF;
+      box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+    }
+
+    .text-content {
+      margin: 25px 0;
+      padding: 25px;
+      background: rgba(0, 217, 255, 0.08);
+      border-left: 6px solid #FF1493;
+      border-radius: 0;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+    }
+
+    .text-content h3 {
+      color: #FFFF00;
+      margin-bottom: 15px;
+      font-family: 'Righteous', cursive;
+      font-size: 1.4em;
+      text-shadow: 1px 1px 0px #FF1493;
+    }
+
+    .text-content p {
+      color: #00D9FF;
+      margin-bottom: 12px;
+    }
+
+    .text-content ul {
+      margin-left: 25px;
+      color: #00D9FF;
+    }
+
+    .text-content li {
+      margin-bottom: 10px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin: 25px 0;
+      border-bottom: 3px solid #FF1493;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tab-button {
+      background: transparent;
+      color: #00D9FF;
+      border: none;
+      padding: 14px 22px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 700;
+      border-bottom: 4px solid transparent;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-family: 'Righteous', cursive;
+    }
+
+    .tab-button:hover {
+      color: #FFFF00;
+    }
+
+    .tab-button.active {
+      color: #FFFF00;
+      border-bottom-color: #FFFF00;
+      box-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+    }
+
+    .tab-content {
+      display: none;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 35px;
+      gap: 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-buttons button {
+      flex: 1;
+    }
+
+    .stage-content {
+      display: none;
+    }
+
+    .stage-content.active {
+      display: block;
+    }
+
+    .example-box {
+      background: rgba(255, 255, 0, 0.1);
+      border: 2px solid #FFFF00;
+      padding: 18px;
+      margin: 15px 0;
+      border-radius: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .example-box strong {
+      color: #FFFF00;
+    }
+
+    hr {
+      border: none;
+      height: 3px;
+      background: linear-gradient(90deg, #FF1493, #9D00FF, #00D9FF);
+      margin: 35px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .sorting-container {
+        grid-template-columns: 1fr;
+      }
+      
+      header h1 {
+        font-size: 2em;
+      }
+
+      .stage-header h2 {
+        font-size: 1.5em;
+      }
+
+      .tabs {
+        flex-wrap: wrap;
+      }
+
+      .nav-buttons {
+        flex-direction: column;
+      }
+
+      .unsorted-items .sortable-item {
+        flex: 0 1 100%;
+      }
+
+      header::before,
+      header::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚡ THEME STUDIO ⚡</h1>
+      <p>Master Literary Analysis - 80s Style!</p>
+    </header>
+
+    <div id="stages">
+      <!-- STAGE 0: LESSON & FOUNDATION -->
+      <div class="stage-content active" id="stage-0">
+        <div class="stage-container">
+          <div class="stage-content">
+            <div class="stage-header">
+              <h2>Stage 0: Decode Theme Like a Boss</h2>
+              <p>Learn to crush the difference between topic, main idea, and theme.</p>
+            </div>
+
+            <div class="text-content">
+              <h3>🎬 What's the Difference?</h3>
+              <p><strong style="color: #FFFF00;">TOPIC</strong> = The SUBJECT (one or two words)</p>
+              <p style="margin: 15px 0;">Example: <span style="background: rgba(255, 255, 0, 0.2); padding: 4px 8px;">FRIENDSHIP</span></p>
+              
+              <p style="margin-top: 20px;"><strong style="color: #FFFF00;">MAIN IDEA</strong> = What HAPPENS in the story (summary of plot)</p>
+              <p style="margin: 15px 0;">Example: <span style="background: rgba(0, 217, 255, 0.2); padding: 4px 8px;">A friend breaks a promise and loses trust</span></p>
+              
+              <p style="margin-top: 20px;"><strong style="color: #FFFF00;">THEME</strong> = The BIG MESSAGE about life (what it MEANS)</p>
+              <p style="margin: 15px 0;">Example: <span style="background: rgba(255, 20, 147, 0.2); padding: 4px 8px;">Trust is fragile and must be earned through consistent action</span></p>
+            </div>
+
+            <div class="example-box">
+              <strong>🔥 Remember:</strong> Theme is a COMPLETE SENTENCE that answers "What truth about life or human nature does this story show?" A single word is TOPIC. A plot summary is MAIN IDEA.
+            </div>
+
+            <h3 style="margin-top: 35px; color: #FFFF00; font-family: 'Righteous', cursive; text-shadow: 1px 1px 0px #FF1493;">PRACTICE 1: Fill in the Blanks</h3>
+            <p style="color: #00D9FF; margin-bottom: 20px; font-weight: bold;">Complete the Venn diagram in your head. Choose the right category:</p>
+
+            <div class="fill-blank-exercise">
+              <p>1. "The character learns that mistakes can lead to growth." — This is a <input type="text" id="fill1" placeholder="topic/main idea/theme"></p>
+              <p style="margin-top: 15px;">2. "A student studies hard for an exam." — This is a <input type="text" id="fill2" placeholder="topic/main idea/theme"></p>
+              <p style="margin-top: 15px;">3. "Courage" — This is a <input type="text" id="fill3" placeholder="topic/main idea/theme"></p>
+              <p style="margin-top: 15px;">4. "Standing up for others requires facing your own fears." — This is a <input type="text" id="fill4" placeholder="topic/main idea/theme"></p>
+              <p style="margin-top: 15px;">5. "A girl defies her parents and finds independence." — This is a <input type="text" id="fill5" placeholder="topic/main idea/theme"></p>
+              <button onclick="checkFillBlanks()" style="margin-top: 20px;">Check My Answers</button>
+              <div id="fill-feedback"></div>
+            </div>
+
+            <h3 style="margin-top: 35px; color: #FFFF00; font-family: 'Righteous', cursive; text-shadow: 1px 1px 0px #FF1493;">PRACTICE 2: Identify & Sort</h3>
+            <p style="color: #00D9FF; margin-bottom: 20px; font-weight: bold;">Drag each statement to the correct category. Use the skill from Practice 1!</p>
+
+            <div class="sorting-container">
+              <div class="category-box">
+                <h4>✅ THEMES</h4>
+                <div id="themes-box"></div>
+              </div>
+              <div class="category-box">
+                <h4>❌ NOT THEMES</h4>
+                <div id="non-themes-box"></div>
+              </div>
+            </div>
+
+            <div class="unsorted-items" id="unplaced"></div>
+
+            <button onclick="stage0_checkSorting()" style="margin-top: 20px;">Check My Sorting</button>
+            <div id="sort-feedback"></div>
+
+            <h3 style="margin-top: 35px; color: #FFFF00; font-family: 'Righteous', cursive; text-shadow: 1px 1px 0px #FF1493;">PRACTICE 3: Multiple Choice Mastery</h3>
+
+            <div class="mc-question">
+              <h4>Q1: Which statement is the STRONGEST theme?</h4>
+              <div class="mc-option">
+                <label><input type="radio" name="mc1" value="a"> Honesty builds stronger relationships than deception.</label>
+              </div>
+              <div class="mc-option">
+                <label><input type="radio" name="mc1" value="b"> People tell lies sometimes.</label>
+              </div>
+              <div class="mc-option">
+                <label><input type="radio" name="mc1" value="c"> The girl told the truth in the story.</label>
+              </div>
+            </div>
+
+            <div class="mc-question">
+              <h4>Q2: What topic is this theme ABOUT? "Courage often means doing the right thing even when it's hard."</h4>
+              <div class="mc-option">
+                <label><input type="radio" name="mc2" value="a"> Courage</label>
+              </div>
+              <div class="mc-option">
+                <label><input type="radio" name="mc2" value="b"> The character faced a difficult choice</label>
+              </div>
+              <div class="mc-option">
+                <label><input type="radio" name="mc2" value="c"> Things that are hard</label>
+              </div>
+            </div>
+
+            <div class="mc-question">
+              <h4>Q3: Read this plot summary: "Marcus bullies someone online, gets caught, apologizes, and they become friends." — What COULD be the theme?</h4>
+              <div class="mc-option">
+                <label><input type="radio" name="mc3" value="a"> Redemption is possible when you own your mistakes and work to change.</label>
+              </div>
+              <div class="mc-option">
+                <label><input type="radio" name="mc3" value="b"> Marcus bullied someone online.</label>
+              </div>
+              <div class="mc-option">
+                <label><input type="radio" name="mc3" value="c"> Bullying</label>
+              </div>
+            </div>
+
+            <div class="mc-question">
+              <h4>Q4: Which example shows THREE different levels (topic → main idea → theme)?</h4>
+              <div class="mc-option">
+                <label><input type="radio" name="mc4" value="a"> Topic: Friendship | Main Idea: Two friends have a conflict | Theme: Conflicts strengthen friendships when handled with honesty.</label>
+              </div>
+              <div class="mc-option">
+                <label><input type="radio" name="mc4" value="b"> Topic: A girl studies | Main Idea: A girl studies | Theme: A girl studies</label>
+              </div>
+              <div class="mc-option">
+                <label><input type="radio" name="mc4" value="c"> Topic: Determination | Theme: Never give up</label>
+              </div>
+            </div>
+
+            <button onclick="stage0_checkMC()" style="margin-top: 20px;">Check My Answers</button>
+            <div id="mc-feedback"></div>
+
+            <div class="nav-buttons" style="margin-top: 35px;">
+              <button class="secondary" disabled>← Back</button>
+              <button onclick="goToStage(1)">Next: Select Your Story →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 1: STORY SELECTION -->
+      <div class="stage-content" id="stage-1">
+        <div class="stage-container">
+          <div class="stage-content">
+            <div class="stage-header">
+              <h2>Stage 1: Pick Your Story</h2>
+              <p>Choose a micro-story to analyze throughout Theme Studio.</p>
+            </div>
+
+            <div class="form-group">
+              <label>Which story will you analyze?</label>
+              <select id="story-select" onchange="loadStory()">
+                <option value="">-- Select a story --</option>
+                <option value="the-promise">The Promise (Trust & Loyalty)</option>
+                <option value="the-stand">The Stand (Courage & Integrity)</option>
+                <option value="second-chance">The Second Chance (Redemption)</option>
+                <option value="crossroads">The Crossroads (Integrity vs. Obedience)</option>
+              </select>
+            </div>
+
+            <div id="story-text" style="display:none; margin-top: 20px;">
+              <div class="text-content" id="story-content"></div>
+            </div>
+
+            <div class="form-group" style="margin-top: 25px;">
+              <label for="initial-theme">Write your initial theme statement for this story:</label>
+              <textarea id="initial-theme" placeholder="What truth about human nature or relationships does this story explore?"></textarea>
+            </div>
+
+            <div class="nav-buttons">
+              <button class="secondary" onclick="goToStage(0)">← Back</button>
+              <button onclick="goToStage(2)">Next: Analyze Scenes →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 2: SCENE ANALYSIS -->
+      <div class="stage-content" id="stage-2">
+        <div class="stage-container">
+          <div class="stage-content">
+            <div class="stage-header">
+              <h2>Stage 2: Scene Analysis</h2>
+              <p>Identify two key scenes that develop your story's theme.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="scene1-location">Scene 1: Where does this scene take place?</label>
+              <input type="text" id="scene1-location" placeholder="Location">
+            </div>
+
+            <div class="form-group">
+              <label for="scene1-action">What happens in this scene?</label>
+              <textarea id="scene1-action" placeholder="Describe the action and dialogue."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="scene1-theme">How does this scene develop your theme?</label>
+              <textarea id="scene1-theme" placeholder="Explain the connection between this scene and your theme."></textarea>
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+              <label for="scene2-location">Scene 2: Where does this scene take place?</label>
+              <input type="text" id="scene2-location" placeholder="Location">
+            </div>
+
+            <div class="form-group">
+              <label for="scene2-action">What happens in this scene?</label>
+              <textarea id="scene2-action" placeholder="Describe the action and dialogue."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="scene2-theme">How does this scene develop your theme?</label>
+              <textarea id="scene2-theme" placeholder="Explain the connection between this scene and your theme."></textarea>
+            </div>
+
+            <div class="nav-buttons">
+              <button class="secondary" onclick="goToStage(1)">← Back</button>
+              <button onclick="goToStage(3)">Next: Character Challenge →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 3: CHARACTER CHALLENGE -->
+      <div class="stage-content" id="stage-3">
+        <div class="stage-container">
+          <div class="stage-content">
+            <div class="stage-header">
+              <h2>Stage 3: Character Challenge</h2>
+              <p>Examine the main character's conflict and growth.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="character-name">Main character name:</label>
+              <input type="text" id="character-name" placeholder="Character name">
+            </div>
+
+            <div class="form-group">
+              <label for="character-challenge">What challenge or conflict does this character face?</label>
+              <textarea id="character-challenge" placeholder="Describe the internal or external conflict."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="character-choice">What choice does the character make in response to this challenge?</label>
+              <textarea id="character-choice" placeholder="Explain the character's decision or action."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="character-growth">How does this choice connect to your theme?</label>
+              <textarea id="character-growth" placeholder="How does the character's journey illustrate your theme statement?"></textarea>
+            </div>
+
+            <div class="nav-buttons">
+              <button class="secondary" onclick="goToStage(2)">← Back</button>
+              <button onclick="goToStage(4)">Next: Draft Your Essay →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 4: ESSAY DRAFT -->
+      <div class="stage-content" id="stage-4">
+        <div class="stage-container">
+          <div class="stage-content">
+            <div class="stage-header">
+              <h2>Stage 4: Write Your Essay</h2>
+              <p>Compose a multi-paragraph essay analyzing your story's theme.</p>
+            </div>
+
+            <div class="text-content">
+              <h3>Essay Structure</h3>
+              <ul>
+                <li><strong>Introduction:</strong> Introduce the story and state your theme clearly.</li>
+                <li><strong>Body Paragraph 1:</strong> Analyze Scene 1 and its connection to the theme.</li>
+                <li><strong>Body Paragraph 2:</strong> Analyze Scene 2 and its connection to the theme.</li>
+                <li><strong>Body Paragraph 3:</strong> Examine the character's challenge and choice; explain how it supports your theme.</li>
+                <li><strong>Conclusion:</strong> Reflect on what the theme reveals about human nature or relationships.</li>
+              </ul>
+            </div>
+
+            <div class="form-group">
+              <label for="essay-draft">Write your essay draft:</label>
+              <textarea id="essay-draft" placeholder="Begin your essay here..." style="min-height: 400px;"></textarea>
+            </div>
+
+            <div class="nav-buttons">
+              <button class="secondary" onclick="goToStage(3)">← Back</button>
+              <button onclick="goToStage(5)">Next: Film Connection →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 5: FILM CONNECTION -->
+      <div class="stage-content" id="stage-5">
+        <div class="stage-container">
+          <div class="stage-content">
+            <div class="stage-header">
+              <h2>Stage 5: Analyze a Disney Film</h2>
+              <p>Connect your theme to a theme in a Disney film.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="film-choice">Which Disney film will you analyze?</label>
+              <input type="text" id="film-choice" placeholder="Film title">
+            </div>
+
+            <div class="form-group">
+              <label for="film-theme">What theme does this film explore that relates to your story's theme?</label>
+              <textarea id="film-theme" placeholder="Identify a theme in the film and explain how it relates to your story."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="film-evidence">Provide evidence from the film to support your analysis:</label>
+              <textarea id="film-evidence" placeholder="Describe scenes or character actions that illustrate this theme in the film."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="film-comparison">How are the themes in your story and the film similar? How are they different?</label>
+              <textarea id="film-comparison" placeholder="Compare and contrast the two themes."></textarea>
+            </div>
+
+            <div class="nav-buttons">
+              <button class="secondary" onclick="goToStage(4)">← Back</button>
+              <button onclick="goToStage(6)">Next: Peer Review →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 6: PEER REVIEW -->
+      <div class="stage-content" id="stage-6">
+        <div class="stage-container">
+          <div class="stage-content">
+            <div class="stage-header">
+              <h2>Stage 6: Peer Review Protocol</h2>
+              <p>Provide constructive feedback on a peer's analysis.</p>
+            </div>
+
+            <div class="text-content">
+              <h3>Peer Review Checklist</h3>
+              <p>For each item, check the box if your peer's work demonstrates this element. Then provide a comment explaining your observation.</p>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="peer-clear-theme" class="peer-check"> 
+                <strong style="color: #FFFF00;">Clear Theme Statement</strong> — Does the student state a theme that is a complete thought (not a single word)?
+              </label>
+              <textarea name="peer-theme-comment" placeholder="Comment on the clarity and quality of the theme statement..." style="margin-top: 10px;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="peer-scenes" class="peer-check"> 
+                <strong style="color: #FFFF00;">Scene Evidence</strong> — Do the two scenes provide strong evidence for the theme?
+              </label>
+              <textarea name="peer-scenes-comment" placeholder="Comment on how well the scenes support the theme..." style="margin-top: 10px;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="peer-character" class="peer-check"> 
+                <strong style="color: #FFFF00;">Character Analysis</strong> — Does the student explain how the character's challenge and choice connect to the theme?
+              </label>
+              <textarea name="peer-character-comment" placeholder="Comment on the character analysis..." style="margin-top: 10px;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="peer-film" class="peer-check"> 
+                <strong style="color: #FFFF00;">Film Connection</strong> — Does the student identify a related theme in the Disney film and provide evidence?
+              </label>
+              <textarea name="peer-film-comment" placeholder="Comment on the film analysis..." style="margin-top: 10px;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" name="peer-writing" class="peer-check"> 
+                <strong style="color: #FFFF00;">Writing Quality</strong> — Is the essay organized, clear, and free of major grammatical errors?
+              </label>
+              <textarea name="peer-writing-comment" placeholder="Comment on the writing quality and organization..." style="margin-top: 10px;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="peer-overall">Overall feedback (what did your peer do well? What could improve?):</label>
+              <textarea id="peer-overall" placeholder="Provide constructive, specific feedback."></textarea>
+            </div>
+
+            <div class="nav-buttons">
+              <button class="secondary" onclick="goToStage(5)">← Back</button>
+              <button onclick="goToStage(7)">Next: Submit →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 7: SUBMISSION -->
+      <div class="stage-content" id="stage-7">
+        <div class="stage-container">
+          <div class="stage-content">
+            <div class="stage-header">
+              <h2>Stage 7: Submit Your Work</h2>
+              <p>Review and submit your Theme Studio assignment.</p>
+            </div>
+
+            <div class="text-content">
+              <h3>Before You Submit</h3>
+              <p>Ensure all stages are complete and all fields contain your best work. Once submitted, your analysis will be reviewed by your teacher.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="student-id">Student ID:</label>
+              <input type="text" id="student-id" placeholder="Your student ID">
+            </div>
+
+            <div class="form-group">
+              <label for="student-name">Name:</label>
+              <input type="text" id="student-name" placeholder="Your full name">
+            </div>
+
+            <div class="form-group">
+              <label for="class-code">Class Code:</label>
+              <input type="text" id="class-code" placeholder="Your class code">
+            </div>
+
+            <div class="form-group">
+              <label for="doc-link">Link to your Google Doc (if using external document):</label>
+              <input type="text" id="doc-link" placeholder="https://docs.google.com/...">
+            </div>
+
+            <button onclick="submitWork()" style="width: 100%; margin-top: 20px; padding: 18px; font-size: 1.15em;">🚀 SUBMIT THEME STUDIO 🚀</button>
+            <div id="submit-feedback"></div>
+
+            <div class="nav-buttons" style="margin-top: 35px;">
+              <button class="secondary" onclick="goToStage(6)">← Back to Peer Review</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const stories = {
+      'the-promise': {
+        title: 'The Promise',
+        text: 'Maya and Kai had been friends since elementary school. One summer, Maya asked Kai to keep a secret: she wanted to try out for the soccer team, but her parents expected her to focus only on academics. Kai promised to keep it quiet. For three weeks, Kai said nothing. But when Kai\'s older brother made a joke about "Maya\'s secret soccer dreams," Kai laughed and repeated it to a friend, who told another, and soon the whole class knew. When Maya found out that Kai had broken her confidence, she felt betrayed. Kai apologized immediately, explaining it had been a thoughtless mistake, not intentional cruelty. Maya listened but struggled to trust again. Over time, as Kai consistently kept smaller confidences and showed genuine remorse, their friendship slowly rebuilt—but it was never quite the same.'
+      },
+      'the-stand': {
+        title: 'The Stand',
+        text: 'During class, Jordan\'s teacher announced a new seating chart that separated friends. Several students complained, but the teacher said the decision was final. Jordan raised her hand and calmly asked if she could explain why the new arrangement might not work. The teacher invited her to speak. Jordan explained that the seating chart separated study partners who worked well together, and she offered an alternative that addressed both the teacher\'s goal (to minimize distractions) and the students\' learning needs. She presented her idea respectfully and with evidence. The teacher listened, asked clarifying questions, and ultimately adopted a modified version of Jordan\'s suggestion. Jordan\'s classmates were impressed by her courage to speak up respectfully, and the teacher respected her thoughtfulness.'
+      },
+      'second-chance': {
+        title: 'The Second Chance',
+        text: 'Marcus was angry at the world. He posted mean comments online about a classmate, making fun of her appearance. The comments spread, and soon others joined in. The girl cried at home and told her parents. The school investigated, and Marcus was suspended. While at home, Marcus felt ashamed. A teacher reached out and asked if Marcus wanted to understand the impact of his words. The teacher didn\'t shame him; instead, she helped him see the situation through the girl\'s perspective. Marcus wrote an apology and asked how he could make it right. He volunteered to help the girl with a project and worked to rebuild trust. It took months, and not everyone forgave him immediately, but Marcus learned that redemption is possible when you own your mistakes and commit to change.'
+      },
+      'crossroads': {
+        title: 'The Crossroads',
+        text: 'Priya\'s parents had always chosen her activities for her. But at fourteen, she wanted to join the robotics club instead of continuing violin lessons. Her parents said absolutely not—they had invested money in her music education, and they expected her to continue. Priya felt trapped between respecting her parents and honoring her own interests. Instead of rebelling, she asked for a family meeting. She brought research on the robotics club, shared her genuine passion for engineering, and proposed a compromise: she\'d continue violin for one more year while starting robotics. She showed respect for her parents\' concerns about her commitment while also advocating for herself. Her parents were impressed by her maturity and agreed to the plan. Priya learned that integrity sometimes means respectfully standing up for yourself, even when it\'s uncomfortable.'
+      }
+    };
+
+    let currentStage = 0;
+    const state = {
+      story: null,
+      values: {},
+      sortScore: 0,
+      mcScore: 0
+    };
+
+    const sortingStatements = [
+      { text: 'Trust is fragile and must be earned through consistent action.', correct: true },
+      { text: 'Courage comes from respecting others and standing up for what is right.', correct: true },
+      { text: 'Redemption requires owning your mistakes and committing to change.', correct: true },
+      { text: 'Integrity means standing up for yourself respectfully, even when it\'s uncomfortable.', correct: true },
+      { text: 'Growth happens through accountability and honest reflection.', correct: true },
+      { text: 'Honesty strengthens relationships and builds trust over time.', correct: true },
+      { text: 'A friend broke a promise and lost the other friend\'s trust.', correct: false },
+      { text: 'People sometimes make mistakes and feel ashamed.', correct: false },
+      { text: 'School is important and teachers care about students.', correct: false },
+      { text: 'Family relationships are complex and require compromise.', correct: false },
+      { text: 'The character wanted to join robotics club instead of violin.', correct: false },
+      { text: 'Mean comments on the internet can hurt people\'s feelings.', correct: false }
+    ];
+
+    function goToStage(n) {
+      document.querySelectorAll('.stage-content').forEach(el => el.classList.remove('active'));
+      document.getElementById('stage-' + n).classList.add('active');
+      currentStage = n;
+      window.scrollTo(0, 0);
+    }
+
+    function loadStory() {
+      const storyKey = document.getElementById('story-select').value;
+      if (storyKey && stories[storyKey]) {
+        const story = stories[storyKey];
+        document.getElementById('story-content').innerHTML = `<h3>${story.title}</h3><p>${story.text}</p>`;
+        document.getElementById('story-text').style.display = 'block';
+        state.story = storyKey;
+      }
+    }
+
+    function checkFillBlanks() {
+      const answers = {
+        fill1: 'theme',
+        fill2: 'main idea',
+        fill3: 'topic',
+        fill4: 'theme',
+        fill5: 'main idea'
+      };
+
+      let score = 0;
+      for (let key in answers) {
+        const userAnswer = document.getElementById(key).value.toLowerCase().trim();
+        if (userAnswer === answers[key]) score++;
+      }
+
+      const feedback = document.getElementById('fill-feedback');
+      feedback.className = 'feedback ' + (score === 5 ? 'correct' : score >= 3 ? 'info' : 'incorrect');
+      feedback.innerHTML = `<strong>You got ${score} of 5 correct!</strong>`;
+    }
+
+    function stage0_checkSorting() {
+      const themes = document.getElementById('themes-box');
+      const nonThemes = document.getElementById('non-themes-box');
+      let correct = 0;
+
+      const themeItems = themes.querySelectorAll('.sortable-item');
+      themeItems.forEach(item => {
+        const text = item.textContent;
+        const stmt = sortingStatements.find(s => s.text === text);
+        if (stmt && stmt.correct) correct++;
+      });
+
+      const nonThemeItems = nonThemes.querySelectorAll('.sortable-item');
+      nonThemeItems.forEach(item => {
+        const text = item.textContent;
+        const stmt = sortingStatements.find(s => s.text === text);
+        if (stmt && !stmt.correct) correct++;
+      });
+
+      const percentage = Math.round((correct / 12) * 100);
+      state.sortScore = percentage;
+
+      const feedback = document.getElementById('sort-feedback');
+      feedback.className = 'feedback ' + (percentage >= 75 ? 'correct' : percentage >= 50 ? 'info' : 'incorrect');
+      feedback.innerHTML = `<strong>⚡ You sorted ${correct} of 12 correctly (${percentage}%)!</strong>`;
+    }
+
+    function stage0_checkMC() {
+      let score = 0;
+      if (document.querySelector('input[name="mc1"]:checked')?.value === 'a') score++;
+      if (document.querySelector('input[name="mc2"]:checked')?.value === 'a') score++;
+      if (document.querySelector('input[name="mc3"]:checked')?.value === 'a') score++;
+      if (document.querySelector('input[name="mc4"]:checked')?.value === 'a') score++;
+
+      state.mcScore = score;
+
+      const feedback = document.getElementById('mc-feedback');
+      feedback.className = 'feedback ' + (score === 4 ? 'correct' : score >= 2 ? 'info' : 'incorrect');
+      feedback.innerHTML = `<strong>⚡ You answered ${score} of 4 correctly!</strong>`;
+    }
+
+    function submitWork() {
+      const required = [
+        'student-id', 'student-name', 'story-select', 'initial-theme',
+        'scene1-location', 'scene1-action', 'scene1-theme',
+        'scene2-location', 'scene2-action', 'scene2-theme',
+        'character-name', 'character-challenge', 'character-choice', 'character-growth',
+        'essay-draft', 'film-choice', 'film-theme', 'film-evidence', 'film-comparison'
+      ];
+
+      const missing = [];
+      required.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el || !el.value || el.value.trim() === '') {
+          missing.push(id);
+        }
+      });
+
+      const feedback = document.getElementById('submit-feedback');
+      if (missing.length > 0) {
+        feedback.className = 'feedback incorrect';
+        feedback.innerHTML = `<strong>⚠️ Complete all required fields before submitting!</strong>`;
+        return;
+      }
+
+      const submission = {
+        studentId: document.getElementById('student-id').value,
+        studentName: document.getElementById('student-name').value,
+        classCode: document.getElementById('class-code').value,
+        story: state.story,
+        initialTheme: document.getElementById('initial-theme').value,
+        scene1: {
+          location: document.getElementById('scene1-location').value,
+          action: document.getElementById('scene1-action').value,
+          connection: document.getElementById('scene1-theme').value
+        },
+        scene2: {
+          location: document.getElementById('scene2-location').value,
+          action: document.getElementById('scene2-action').value,
+          connection: document.getElementById('scene2-theme').value
+        },
+        character: {
+          name: document.getElementById('character-name').value,
+          challenge: document.getElementById('character-challenge').value,
+          choice: document.getElementById('character-choice').value,
+          growth: document.getElementById('character-growth').value
+        },
+        essay: document.getElementById('essay-draft').value,
+        film: {
+          title: document.getElementById('film-choice').value,
+          theme: document.getElementById('film-theme').value,
+          evidence: document.getElementById('film-evidence').value,
+          comparison: document.getElementById('film-comparison').value
+        },
+        sortScore: state.sortScore,
+        mcScore: state.mcScore,
+        docLink: document.getElementById('doc-link').value,
+        timestamp: new Date().toISOString()
+      };
+
+      fetch('/.netlify/functions/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submission)
+      })
+      .then(res => res.json())
+      .then(data => {
+        feedback.className = 'feedback correct';
+        feedback.innerHTML = `<strong>🎉 SUBMISSION RECEIVED! Your work has been submitted successfully!</strong>`;
+      })
+      .catch(err => {
+        feedback.className = 'feedback incorrect';
+        feedback.innerHTML = `<strong>Error: ${err.message}</strong>`;
+      });
+    }
+
+    function initializeSorting() {
+      const unplaced = document.getElementById('unplaced');
+      unplaced.innerHTML = '';
+      sortingStatements.forEach(stmt => {
+        const div = document.createElement('div');
+        div.className = 'sortable-item';
+        div.textContent = stmt.text;
+        div.draggable = true;
+        div.ondragstart = (e) => e.dataTransfer.effectAllowed = 'move';
+        div.ondragend = (e) => div.classList.remove('dragging');
+        unplaced.appendChild(div);
+      });
+
+      const themesBox = document.getElementById('themes-box');
+      const nonThemesBox = document.getElementById('non-themes-box');
+
+      [themesBox, nonThemesBox].forEach(box => {
+        box.ondragover = (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; };
+        box.ondrop = (e) => {
+          e.preventDefault();
+          const item = document.querySelector('.sortable-item.dragging');
+          if (item) box.appendChild(item);
+        };
+      });
+
+      document.addEventListener('dragstart', (e) => {
+        if (e.target.classList.contains('sortable-item')) {
+          e.target.classList.add('dragging');
+        }
+      });
+    }
+
+    window.addEventListener('load', initializeSorting);
+  </script>
+</body>
+</html>
